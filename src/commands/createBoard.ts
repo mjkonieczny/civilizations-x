@@ -2,21 +2,8 @@ import { Command } from '../model'
 import { isBoardSizeNotInRange } from '../specification'
 import { rulesCommandFactory } from './rules'
 import { warningCommandFactory } from './warning'
-
-const createBoardCommand = (n: number, m: number): Command => (game) => ({
-  ...game,
-  board: {
-    n,
-    m,
-  },
-  logs: [
-    ...game.logs,
-    {
-      text: `Board created with ${n} rows and ${m} columns`,
-      level: 'info'
-    }
-  ]
-})
+import { infoCommandFactory } from './info'
+import { compositeCommandFactory } from './composite'
 
 export const createBoardCommandFactory = (n: number, m: number): Command => rulesCommandFactory([
   {
@@ -24,6 +11,15 @@ export const createBoardCommandFactory = (n: number, m: number): Command => rule
     specification: isBoardSizeNotInRange(n, m),
   },
   {
-    command: createBoardCommand(n, m),
+    command: compositeCommandFactory([
+      (game) => ({
+        ...game,
+        board: {
+          n,
+          m,
+        },
+      }),
+      infoCommandFactory(`Board created with ${n} rows and ${m} columns`),
+    ]),
   },
 ])
