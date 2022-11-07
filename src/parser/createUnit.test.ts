@@ -68,4 +68,40 @@ describe('create unit command', () => {
       })
     )
   })
+
+  it.each([
+    ['dragon', 'Caraxas'],
+    ['knight', 'Lancelot'],
+    ['peasant', 'Janusz'],
+    ['wizard', 'Merlin'],
+  ])('should not create %s %s because the name is already taken', (type, name) => {
+    // given
+    const commands = parse(`
+      ${createBoardCommand}
+      create ${type} ${name} 1 1
+      create ${type} ${name} 2 2
+    `)
+
+    // when
+    const result = execute(commands)
+
+    // then
+    expect(result).toEqual(
+      expect.objectContaining({
+        units: [
+          {
+            type,
+            name,
+            position: [1, 1],
+          },
+        ],
+        logs: expect.arrayContaining([
+          {
+            text: `${type} ${name} cannot be created because the name is already taken`,
+            level: 'warning',
+          },
+        ]),
+      })
+    )
+  })
 })

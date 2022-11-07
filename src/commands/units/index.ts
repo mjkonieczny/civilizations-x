@@ -1,4 +1,4 @@
-import { Command, isWithinBounds, not, UnitType } from '../../model'
+import { Command, isUnitNameUnique, isWithinBounds, not, UnitType } from '../../model'
 import { warningCommandFactory } from '../logs'
 import { rulesCommandFactory } from '../rules'
 import { createDragonCommandFactory } from './createDragon'
@@ -28,6 +28,10 @@ export const createUnitCommandFactory = (type: UnitType, args: string[]): Comman
     {
       specification: not(isWithinBounds(position)),
       command: warningCommandFactory(`${type} ${name} cannot be created at position [${position}]`),
+    },
+    {
+      specification: not(isUnitNameUnique(name)),
+      command: warningCommandFactory(`${type} ${name} cannot be created because the name is already taken`),
     },
     {
       command: getUnitComandFactory(type, name, position),
