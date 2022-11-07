@@ -4,7 +4,7 @@ export type Command = (game: Game) => Game;
 
 export const execute = (
   commands: Command[], 
-  game: Game = createEmptyGame()
+  game: Game = createEmptyGame() 
 ) => {
   return commands.reduce((context, command) => command(context), game)
 }

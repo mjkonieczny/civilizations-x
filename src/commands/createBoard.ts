@@ -5,5 +5,12 @@ export const createBoardCommandFactory = (n: number, m: number): Command => (gam
   board: {
     n,
     m
-  }
+  },
+  logs: [
+    ...game.logs,
+    {
+      text: `Board created with ${n} rows and ${m} columns`,
+      level: 'info'
+    }
+  ]
 })

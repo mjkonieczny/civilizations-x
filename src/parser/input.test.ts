@@ -18,7 +18,13 @@ describe('input should be parsed', () => {
       board: {
         n: 1,
         m: 2
-      }
+      },
+      logs: [
+        {
+          text: 'Board created with 1 rows and 2 columns',
+          level: 'info'
+        }
+      ]
     })
   })
 })
