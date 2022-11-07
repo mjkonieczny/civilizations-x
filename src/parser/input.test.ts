@@ -30,9 +30,11 @@ describe('create board command', () => {
   })
 
   it.each([
-    ['create board rectangle 1 1', 'Rectangle board created with 1 rows and 1 columns'],
-    ['create board rectangle 3 4', 'Rectangle board created with 3 rows and 4 columns'],
-  ])('should %s', (command, text) => {
+    ['create board rectangle 1 1', 'rectangle', 'Rectangle board created with 1 rows and 1 columns'],
+    ['create board rectangle 3 4', 'rectangle', 'Rectangle board created with 3 rows and 4 columns'],
+    ['create board hexagon 1 1', 'hexagon', 'Hexagon board created with 1 rows and 1 columns'],
+    ['create board hexagon 3 4', 'hexagon', 'Hexagon board created with 3 rows and 4 columns'],
+  ])('should %s', (command, orientationType, text) => {
     // given
     const commands = parse(`
       ${command}
@@ -45,7 +47,7 @@ describe('create board command', () => {
     expect(result).toEqual(
       expect.objectContaining({
         orientation: expect.objectContaining({
-          type: 'rectangle',
+          type: orientationType,
         }),
         logs: [
           {
@@ -58,11 +60,15 @@ describe('create board command', () => {
   })
 
   it.each([
-    ['create board rectangle 0 1'],
-    ['create board rectangle 1 0'],
-    ['create board rectangle 251 1'],
-    ['create board rectangle 1 251'],
-  ])('should not %s', (command) => {
+    ['create board rectangle 0 1', 'Board size must be between 1-10 x 1-20'],
+    ['create board rectangle 1 0', 'Board size must be between 1-10 x 1-20'],
+    ['create board rectangle 11 1', 'Board size must be between 1-10 x 1-20'],
+    ['create board rectangle 1 21', 'Board size must be between 1-10 x 1-20'],
+    ['create board hexagon 0 1', 'Board size must be between 1-5 x 1-5'],
+    ['create board hexagon 1 0', 'Board size must be between 1-5 x 1-5'],
+    ['create board hexagon 6 1', 'Board size must be between 1-5 x 1-5'],
+    ['create board hexagon 1 6', 'Board size must be between 1-5 x 1-5'],
+  ])('should not %s', (command, text) => {
     // given
     const commands = parse(`
       ${command}
@@ -79,7 +85,7 @@ describe('create board command', () => {
         }),
         logs: [
           {
-            text: 'Board size must be between 1 and 250',
+            text,
             level: 'warning'
           }
         ]
