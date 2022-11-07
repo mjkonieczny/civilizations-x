@@ -1,4 +1,4 @@
-import { and, not, Specification } from '../../model'
+import { and, not, Specification } from '..'
 
 type DimensionRange = {
   min: number,

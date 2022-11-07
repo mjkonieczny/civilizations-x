@@ -1,2 +1,3 @@
 export * from './specification'
-export * from './boardDimensions'
+export * from './isBoardSizeNotInRange'
+export * from './isWithinBounds'

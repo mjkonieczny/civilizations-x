@@ -39,4 +39,33 @@ describe('create unit command', () => {
       })
     )
   })
+
+  it.each([
+    ['dragon', -1, 1],
+    ['knight', 1, -1],
+    ['peasant', -1, 1],
+    ['wizard', 1, -1],
+  ])('should not create %s at position %d', (type, x, y) => {
+    // given
+    const commands = parse(`
+      ${createBoardCommand}
+      create ${type} Foo ${x} ${y}
+    `)
+
+    // when
+    const result = execute(commands)
+
+    // then
+    expect(result).toEqual(
+      expect.objectContaining({
+        units: [],
+        logs: expect.arrayContaining([
+          {
+            text: `${type} Foo cannot be created at position [${x},${y}]`,
+            level: 'warning',
+          },
+        ]),
+      })
+    )
+  })
 })
