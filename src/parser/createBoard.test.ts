@@ -2,7 +2,6 @@ import { it, describe, expect } from 'vitest'
 import { execute } from '../model/command'
 import { parse } from './input'
 
-
 describe('create board command', () => {
   it('should not found command', () => {
     // given
@@ -80,7 +79,7 @@ describe('create board command', () => {
       ${command}
     `)
 
-    // 
+    // when
     const result = execute(commands)
 
     // then
