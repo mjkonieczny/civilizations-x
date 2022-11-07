@@ -1,17 +1,17 @@
 import { and, not, Specification } from '../../model'
 
-const isBoardWidthInRange = (maxWidth: number) => (width: number): Specification => () => {
-  return width > 0 && width < maxWidth
+type DimensionRange = {
+  min: number,
+  max: number,
 }
 
-const isBoardHeightInRange = (maxHeight: number) => (height: number): Specification => () => {
-  return height > 0 && height < maxHeight
+const isDimensionInRange = (range: DimensionRange) => (dimension: number): Specification => () => {
+  return dimension >= range.min && dimension <= range.max
 }
 
-export const isBoardSizeNotInRange = (maxWidth: number, maxHeight: number) => (width: number, height: number): Specification =>
+export const isBoardSizeNotInRange = (dimensionRanges: DimensionRange[]) => (dimensions: number[]): Specification =>
   not(
     and(
-      isBoardWidthInRange(maxWidth)(width),
-      isBoardHeightInRange(maxHeight)(height)
+      ...dimensions.map((dimension, index) => isDimensionInRange(dimensionRanges[index])(dimension))
     )
   )

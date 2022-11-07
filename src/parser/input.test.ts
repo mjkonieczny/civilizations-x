@@ -68,6 +68,12 @@ describe('create board command', () => {
     ['create board hexagon 1 0', 'Board size must be between 1-5 x 1-5'],
     ['create board hexagon 6 1', 'Board size must be between 1-5 x 1-5'],
     ['create board hexagon 1 6', 'Board size must be between 1-5 x 1-5'],
+    ['create board cube 0 1 1', 'Board size must be between 1-7 x 1-8 x 1-13'],
+    ['create board cube 1 0 1', 'Board size must be between 1-7 x 1-8 x 1-13'],
+    ['create board cube 1 1 0', 'Board size must be between 1-7 x 1-8 x 1-13'],
+    ['create board cube 8 1 1', 'Board size must be between 1-7 x 1-8 x 1-13'],
+    ['create board cube 1 9 1', 'Board size must be between 1-7 x 1-8 x 1-13'],
+    ['create board cube 1 1 14', 'Board size must be between 1-7 x 1-8 x 1-13'],
   ])('should not %s', (command, text) => {
     // given
     const commands = parse(`
