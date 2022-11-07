@@ -1,12 +1,12 @@
 import { Command } from '../model'
-import { createBoardCommandFactory } from './createBoard'
+import { createBoardCommandFactory } from './board'
 
 export const createCommandFactory = (...args: string[]): Command => {
-  const [type, ...rest] = args
+  const [what, type, ...rest] = args
 
-  switch (type) {
+  switch (what) {
   case 'board':
-    return createBoardCommandFactory(Number(rest[0]), Number(rest[1]))
+    return createBoardCommandFactory(type, ...rest)
   default:
     throw new Error(`Unknown command ${type}`)
   }

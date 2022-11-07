@@ -1,15 +1,12 @@
-import { Board } from './board'
+import { Orientation, noneOrientationFactory } from './orientation'
 import { Log } from './log'
 
 export type Game = {
-  board: Board;
+  orientation: Orientation;
   logs: Log[]
 }
 
 export const createEmptyGame = (): Game => ({
-  board: {
-    n: 0,
-    m: 0
-  },
+  orientation: noneOrientationFactory(),
   logs: []
 })

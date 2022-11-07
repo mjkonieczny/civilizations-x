@@ -1,4 +1,4 @@
-import { Command } from '../model'
+import { Command } from '../../model'
 
 export const warningCommandFactory = (text: string): Command => (game) => ({
   ...game,

@@ -1,6 +1,6 @@
 import { Command } from '../model'
 import { createCommandFactory } from './create'
-import { notFoundCommandFactory } from './notFound'
+import { notFoundCommandFactory } from './logs/notFound'
 
 export const commandFactory = (
   command: string,

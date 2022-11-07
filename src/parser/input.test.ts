@@ -14,18 +14,25 @@ describe('create board command', () => {
     const result = execute(commands)
 
     // then
-    expect(result.logs).toEqual([
-      {
-        text: 'Command hokuspokus not found',
-        level: 'error'
-      }
-    ])
+    expect(result).toEqual(
+      expect.objectContaining({
+        orientation: expect.objectContaining({
+          type: 'none',
+        }),
+        logs: [
+          {
+            text: 'Command hokuspokus not found',
+            level: 'error'
+          }
+        ]
+      })
+    )
   })
 
   it.each([
-    ['create board 1 1', 1, 1, 'Board created with 1 rows and 1 columns', 'info'],
-    ['create board 3 4', 3, 4, 'Board created with 3 rows and 4 columns', 'info'],
-  ])('should %s', (command, n, m, text, level) => {
+    ['create board rectangle 1 1', 'Rectangle board created with 1 rows and 1 columns'],
+    ['create board rectangle 3 4', 'Rectangle board created with 3 rows and 4 columns'],
+  ])('should %s', (command, text) => {
     // given
     const commands = parse(`
       ${command}
@@ -35,25 +42,26 @@ describe('create board command', () => {
     const result = execute(commands)
 
     // then
-    expect(result).toEqual({
-      board: {
-        n,
-        m,
-      },
-      logs: [
-        {
-          text,
-          level
-        }
-      ]
-    })
+    expect(result).toEqual(
+      expect.objectContaining({
+        orientation: expect.objectContaining({
+          type: 'rectangle',
+        }),
+        logs: [
+          {
+            text,
+            level: 'info'
+          }
+        ]
+      })
+    )
   })
 
   it.each([
-    ['create board 0 1'],
-    ['create board 1 0'],
-    ['create board 251 1'],
-    ['create board 1 251'],
+    ['create board rectangle 0 1'],
+    ['create board rectangle 1 0'],
+    ['create board rectangle 251 1'],
+    ['create board rectangle 1 251'],
   ])('should not %s', (command) => {
     // given
     const commands = parse(`
@@ -64,17 +72,18 @@ describe('create board command', () => {
     const result = execute(commands)
 
     // then
-    expect(result).toEqual({
-      board: {
-        n: 0,
-        m: 0,
-      },
-      logs: [
-        {
-          text: 'Board size must be between 1 and 250',
-          level: 'warning'
-        }
-      ]
-    })
+    expect(result).toEqual(
+      expect.objectContaining({
+        orientation: expect.objectContaining({
+          type: 'none',
+        }),
+        logs: [
+          {
+            text: 'Board size must be between 1 and 250',
+            level: 'warning'
+          }
+        ]
+      })
+    )
   })
 })
