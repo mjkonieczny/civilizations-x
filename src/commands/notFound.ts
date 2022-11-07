@@ -1,12 +1,4 @@
 import { Command } from '../model'
+import { errorCommandFactory } from './error'
 
-export const notFoundCommandFactory = (name: string): Command => (game) => ({
-  ...game,
-  logs: [
-    ...game.logs,
-    {
-      text: `Command [${name}] not found`,
-      level: 'error'
-    }
-  ]
-})
+export const notFoundCommandFactory = (name: string): Command => errorCommandFactory(`Command ${name} not found`)

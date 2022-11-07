@@ -1,3 +1,5 @@
 export * from './game'
 export * from './board'
 export * from './command'
+export * from './specification'
+export * from './rule'

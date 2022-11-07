@@ -1,4 +1,4 @@
-export type LogLevel = 'info' | 'error'
+export type LogLevel = 'info' | 'warning' | 'error'
 
 export type Log = {
   text: string,

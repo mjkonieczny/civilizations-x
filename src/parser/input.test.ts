@@ -3,7 +3,7 @@ import { execute } from '../model/command'
 import { parse } from './input'
 
 
-describe('input should be parsed', () => {
+describe('create board command', () => {
   it('should not found command', () => {
     // given
     const commands = parse(`
@@ -16,7 +16,7 @@ describe('input should be parsed', () => {
     // then
     expect(result.logs).toEqual([
       {
-        text: 'Command [hokuspokus] not found',
+        text: 'Command hokuspokus not found',
         level: 'error'
       }
     ])
@@ -50,18 +50,17 @@ describe('input should be parsed', () => {
   })
 
   it.each([
-    ['create board 0 1', 'Board size must be between 1 and 250', 'error'],
-    ['create board 1 0', 'Board size must be between 1 and 250', 'error'],
-    ['create board 251 1', 'Board size must be between 1 and 250', 'error'],
-    ['create board 1 251', 'Board size must be between 1 and 250', 'error'],
-  ])('should not %s', (command, text, level) => {
+    ['create board 0 1'],
+    ['create board 1 0'],
+    ['create board 251 1'],
+    ['create board 1 251'],
+  ])('should not %s', (command) => {
     // given
     const commands = parse(`
-
       ${command}
     `)
 
-    // when
+    // 
     const result = execute(commands)
 
     // then
@@ -72,8 +71,8 @@ describe('input should be parsed', () => {
       },
       logs: [
         {
-          text,
-          level
+          text: 'Board size must be between 1 and 250',
+          level: 'warning'
         }
       ]
     })
