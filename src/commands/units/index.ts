@@ -1,12 +1,12 @@
 import { Command, isUnitNameUnique, isWithinBounds, not, UnitType } from '../../model'
 import { warningCommandFactory } from '../logs'
-import { rulesCommandFactory } from '../rules'
+import { chainOfResponsibilityBuilder } from '../chainOfResponsibility'
 import { createDragonCommandFactory } from './createDragon'
 import { createKnightCommandFactory } from './createKnight'
 import { createPeasantCommandFactory } from './createPeasant'
 import { createWizardCommandFactory } from './createWizard'
 
-const getUnitComandFactory = (type: UnitType, name: string, position: number[]) => {
+const getUnitCommandFactory = (type: UnitType, name: string, position: number[]) => {
   switch (type) {
   case 'peasant':
     return createPeasantCommandFactory(name, position)
@@ -24,17 +24,17 @@ export const createUnitCommandFactory = (type: UnitType, args: string[]): Comman
 
   const position = rest.map(Number)
 
-  return rulesCommandFactory([
-    {
-      specification: not(isWithinBounds(position)),
-      command: warningCommandFactory(`${type} ${name} cannot be created at position [${position}]`),
-    },
-    {
-      specification: not(isUnitNameUnique(name)),
-      command: warningCommandFactory(`${type} ${name} cannot be created because the name is already taken`),
-    },
-    {
-      command: getUnitComandFactory(type, name, position),
-    }
-  ])
+  return chainOfResponsibilityBuilder()
+    .addResponsibility(
+      warningCommandFactory(`${type} ${name} cannot be created at position [${position}]`),
+      not(isWithinBounds(position)),
+    )
+    .addResponsibility(
+      warningCommandFactory(`${type} ${name} cannot be created because the name is already taken`),
+      not(isUnitNameUnique(name)),
+    )
+    .addResponsibility(
+      getUnitCommandFactory(type, name, position),
+    )
+    .build()
 }
