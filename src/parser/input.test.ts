@@ -4,6 +4,24 @@ import { parse } from './input'
 
 
 describe('input should be parsed', () => {
+  it('should not found command', () => {
+    // given
+    const commands = parse(`
+      hokuspokus board 1 2
+    `)
+
+    // when
+    const result = execute(commands)
+
+    // then
+    expect(result.logs).toEqual([
+      {
+        text: 'Command [hokuspokus] not found',
+        level: 'error'
+      }
+    ])
+  })
+
   it('should create board', () => {
     // given
     const commands = parse(`
