@@ -16,5 +16,13 @@ export const hexagonStrategy = (n: number, m: number): Orientation => ({
     const [x, y] = vector
 
     return x > -n && x < n && y > -m && y < m
+  },
+
+  isDirection: (direction: string): boolean => {
+    return false
+  },
+
+  transform: (vector: Vector, direction: string, step: number) => {
+    return vector
   }
 })

@@ -7,5 +7,8 @@ export type Orientation = {
 
   createVector: (...args: number[]) => Vector
   isWithinBounds: (vector: Vector) => boolean
+
+  isDirection: (direction: string) => boolean
+  transform: (vector: Vector, direction: string, step: number) => Vector
 }
 
