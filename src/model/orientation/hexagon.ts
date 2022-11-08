@@ -40,5 +40,9 @@ export const hexagonStrategy = (n: number, m: number): Orientation => ({
 
       return [x + dx * step, y + dy * step]
     }, vector)
+  },
+
+  isInDirection: (source: Vector, target: Vector, direction: string) => {
+    return false
   }
 })

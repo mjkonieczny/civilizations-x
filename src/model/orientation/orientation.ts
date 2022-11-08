@@ -10,5 +10,7 @@ export type Orientation = {
 
   isDirection: (direction: string) => boolean
   transform: (vector: Vector, direction: string, step: number) => Vector
+
+  isInDirection: (source: Vector, target: Vector, direction: string) => boolean
 }
 

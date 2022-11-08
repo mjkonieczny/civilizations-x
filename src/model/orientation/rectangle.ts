@@ -39,5 +39,21 @@ export const rectangleStrategy = (n: number, m: number): Orientation => ({
 
       return [x + dx * step, y + dy * step]
     }, vector)
+  },
+
+  isInDirection: (source: Vector, target: Vector, direction: string) => {
+    const [x, y] = source
+    const [tx, ty] = target
+
+    const [dx, dy] = direction.split('').reduce(([dx, dy], subDirection) => {
+      const [subDx, subDy] = directionsMap[subDirection]
+
+      return [dx + subDx, dy + subDy]
+    }, [0, 0])
+
+    const zx = tx - x
+    const zy = ty - y
+
+    return zy / zx === dy / dx && zx * dx >= 0 && zy * dy >= 0
   }
 })

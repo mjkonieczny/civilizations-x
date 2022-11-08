@@ -47,5 +47,9 @@ export const cubeStrategy = (n: number, m: number, h: number): Orientation => ({
 
       return [x + dx * step, y + dy * step, z + dz * step]
     }, vector)
+  },
+
+  isInDirection: (source: Vector, target: Vector, direction: string) => {
+    return false
   }
 })
