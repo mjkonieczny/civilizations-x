@@ -131,3 +131,52 @@ describe('move command in cubic board', () => {
     )
   })
 })
+
+describe('move command in hexagonal board', () => {
+  const initialCommands = `
+    create board hexagon 4 5
+    create dragon Caraxas 2 3
+    create knight Lancelot 1 1
+  `
+
+  it.each([
+    ['Caraxas', 'E', 1, 3, 3],
+    ['Caraxas', 'W', 1, 1, 3],
+    ['Caraxas', 'NE', 1, 3, 4],
+    ['Caraxas', 'NW', 1, 1, 4],
+    ['Caraxas', 'SE', 1, 3, 2],
+    ['Caraxas', 'SW', 1, 1, 2],
+    ['Caraxas', 'E', 2, 4, 3],
+    ['Caraxas', 'W', 2, 0, 3],
+    ['Lancelot', 'E', 1, 2, 3],
+    ['Lancelot', 'W', 1, 2, 3],
+  ])('should move %s', (name, direction, step, x, y) => {
+    // given
+    const commands = parse(`
+      ${initialCommands}
+      move ${name} ${direction} ${step}
+    `)
+
+    // when
+    const result = execute(commands)
+
+    // then
+    expect(result).toEqual(
+      expect.objectContaining({
+        units: expect.arrayContaining([
+          {
+            type: 'dragon',
+            name: 'Caraxas',
+            position: [x, y],
+          },
+        ]),
+        logs: expect.arrayContaining([
+          {
+            text: `${name} moved ${direction} ${step}`,
+            level: 'info',
+          },
+        ]),
+      })
+    )
+  })
+})

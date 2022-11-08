@@ -1,5 +1,5 @@
 import { Orientation, Vector } from './orientation'
-import { ewDirectionsMap, nsDirectionsMap } from './rectangle'
+import { ewDirectionsMap, nsDirectionsMap } from './directions'
 
 const udDirectionsMap: Record<string, number[]> = ({
   U: [0, 0, 1],

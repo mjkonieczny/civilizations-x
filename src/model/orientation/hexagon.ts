@@ -1,4 +1,10 @@
 import { Orientation, Vector } from './orientation'
+import { ewDirectionsMap, nsDirectionsMap } from './directions'
+
+const directionsMap: Record<string, number[]> = ({
+  ...nsDirectionsMap,
+  ...ewDirectionsMap,
+})
 
 export const hexagonStrategy = (n: number, m: number): Orientation => ({
   type: 'hexagon',
@@ -19,10 +25,20 @@ export const hexagonStrategy = (n: number, m: number): Orientation => ({
   },
 
   isDirection: (direction: string): boolean => {
-    return false
+    if (direction.length === 1) {
+      return Object.keys(ewDirectionsMap).includes(direction)
+    } else {
+      return Object.keys(nsDirectionsMap).includes(direction[0]) && Object.keys(ewDirectionsMap).includes(direction[1])
+    }
   },
 
   transform: (vector: Vector, direction: string, step: number) => {
-    return vector
+    const subDirections = direction.split('')
+
+    return subDirections.reduce(([ x, y ], subDirection) => {
+      const [dx, dy] = directionsMap[subDirection]
+
+      return [x + dx * step, y + dy * step]
+    }, vector)
   }
 })
