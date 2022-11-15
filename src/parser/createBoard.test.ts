@@ -1,5 +1,5 @@
 import { it, describe, expect } from 'vitest'
-import { execute } from '../model/command'
+import { execute } from '../model'
 import { parse } from './input'
 
 describe('create board command', () => {

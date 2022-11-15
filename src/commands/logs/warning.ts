@@ -1,6 +1,7 @@
-import { Command } from '../../model'
+import { Game } from '../../model'
+import { Command } from '../../patterns'
 
-export const warningCommandFactory = (text: string): Command => (game) => ({
+export const warning = (text: string): Command<Game> => (game) => ({
   ...game,
   logs: [
     ...game.logs,

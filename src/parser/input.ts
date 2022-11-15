@@ -1,7 +1,8 @@
-import { Command } from '../model/command'
+import { Command } from '../patterns'
 import { commandFactory } from '../commands'
+import { Game } from '../model'
 
-export const parse = (input: string): Command[] => {
+export const parse = (input: string): Command<Game>[] => {
   const lines = input
     .split('\n')
     .map(line => line.trim())

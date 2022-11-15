@@ -1,4 +1,5 @@
-import { Command } from '../../model'
-import { errorCommandFactory } from './error'
+import { Game } from '../../model'
+import { Command } from '../../patterns'
+import { error } from './error'
 
-export const notFoundCommandFactory = (name: string): Command => errorCommandFactory(`Command ${name} not found`)
+export const notFound = (name: string): Command<Game> => error(`Command ${name} not found`)

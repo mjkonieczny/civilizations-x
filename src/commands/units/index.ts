@@ -1,39 +1,39 @@
-import { Command, isUnitNameUnique, isWithinBounds, not, UnitType } from '../../model'
-import { warningCommandFactory } from '../logs'
-import { chainOfResponsibilityBuilder } from '../chainOfResponsibility'
-import { createDragonCommandFactory } from './createDragon'
-import { createKnightCommandFactory } from './createKnight'
-import { createPeasantCommandFactory } from './createPeasant'
-import { createWizardCommandFactory } from './createWizard'
+import { Game, isUnitNameUnique, isWithinBounds, UnitType } from '../../model'
+import { chainBuilder, not } from '../../patterns'
+import { warning } from '../logs'
+import { createDragon } from './createDragon'
+import { createKnight } from './createKnight'
+import { createPeasant } from './createPeasant'
+import { createWizard } from './createWizard'
 
 const getUnitCommandFactory = (type: UnitType, name: string, position: number[]) => {
   switch (type) {
   case 'peasant':
-    return createPeasantCommandFactory(name, position)
+    return createPeasant(name, position)
   case 'knight':
-    return createKnightCommandFactory(name, position)
+    return createKnight(name, position)
   case 'wizard':
-    return createWizardCommandFactory(name, position)
+    return createWizard(name, position)
   case 'dragon':
-    return createDragonCommandFactory(name, position)
+    return createDragon(name, position)
   }
 }
 
-export const createUnitCommandFactory = (type: UnitType, args: string[]): Command => {
+export const createUnit = (type: UnitType, args: string[]) => {
   const [name, ...rest] = args
 
   const position = rest.map(Number)
 
-  return chainOfResponsibilityBuilder()
-    .addResponsibility(
-      warningCommandFactory(`${type} ${name} cannot be created at position [${position}]`),
+  return chainBuilder<Game>()
+    .add(
+      warning(`${type} ${name} cannot be created at position [${position}]`),
       not(isWithinBounds(position)),
     )
-    .addResponsibility(
-      warningCommandFactory(`${type} ${name} cannot be created because the name is already taken`),
+    .add(
+      warning(`${type} ${name} cannot be created because the name is already taken`),
       not(isUnitNameUnique(name)),
     )
-    .addResponsibility(
+    .add(
       getUnitCommandFactory(type, name, position),
     )
     .build()

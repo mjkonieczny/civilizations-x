@@ -6,4 +6,8 @@ export const noneOrientationFactory = (): Orientation => ({
   createVector: (...args: number[]) => args,
   
   isWithinBounds: () => true,
+
+  isDirection: () => false,
+
+  transform: (vector) => vector,
 })

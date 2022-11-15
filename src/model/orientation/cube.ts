@@ -1,12 +1,7 @@
 import { Orientation, Vector } from './orientation'
-import { ewDirectionsMap, nsDirectionsMap } from './directions'
+import { ewDirectionsMap, nsDirectionsMap, udDirectionsMap } from './directions'
 
-const udDirectionsMap: Record<string, number[]> = ({
-  U: [0, 0, 1],
-  D: [0, 0, -1],
-})
-
-const directionsMap: Record<string, number[]> = ({
+export const directionsMap: Record<string, number[]> = ({
   ...nsDirectionsMap,
   ...ewDirectionsMap,
   ...udDirectionsMap,
