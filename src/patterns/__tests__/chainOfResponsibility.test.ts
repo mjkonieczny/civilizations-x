@@ -10,7 +10,7 @@ describe('chainOfResponsibility', () => {
     [-1, -1],
     [0, 1],
     [1, -1],
-  ])('should execute', (number, expected) => {
+  ])('should execute %s %s', (number, expected) => {
     // given
     const chain = createChain<number>([
       {

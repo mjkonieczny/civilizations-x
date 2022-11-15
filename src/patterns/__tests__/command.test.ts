@@ -5,7 +5,7 @@ describe('command', () => {
   it.each([
     [ 0, 1, 2, 3 ],
     [ 1, 2, 3, 4 ],
-  ])('should execute commands', (x, y, z, expected) => {
+  ])('should execute commands %s %s %s %s', (x, y, z, expected) => {
     // given
     const commands = [
       vi.fn().mockReturnValue(y),

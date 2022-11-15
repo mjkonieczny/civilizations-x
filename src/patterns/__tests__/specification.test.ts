@@ -11,7 +11,7 @@ describe('specification', () => {
     [0, false],
     [1, false],
     [2, true],
-  ])('should and', (number, expected) => {
+  ])('should and %d %s', (number, expected) => {
     // given
     const isSatisfiedBy = and(isEven, isPositive)
 
@@ -27,7 +27,7 @@ describe('specification', () => {
     [-1, false],
     [0, true],
     [1, true],
-  ])('should or', (number, expected) => {
+  ])('should or %s %s', (number, expected) => {
     // given
     const isSatisfiedBy = or(isEven, isPositive)
 
@@ -41,7 +41,7 @@ describe('specification', () => {
   it.each([
     [0, false],
     [1, true],
-  ])('should not', (number, expected) => {
+  ])('should not %s %s', (number, expected) => {
     // given
     const isSatisfiedBy = not(isEven)
 

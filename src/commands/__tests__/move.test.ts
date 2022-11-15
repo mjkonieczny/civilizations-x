@@ -26,7 +26,7 @@ describe('move command in rectangular board', () => {
     ['Lancelot', 'S', 1, 2, 3],
     ['Lancelot', 'E', 1, 2, 3],
     ['Lancelot', 'W', 1, 2, 3],
-  ])('should move %s', (name, direction, step, x, y) => {
+  ])('should move %s in %s %s (%s, %s)', (name, direction, step, x, y) => {
     // given
     const commands = parse(`
       ${initialCommands}
@@ -101,7 +101,7 @@ describe('move command in cubic board', () => {
     ['Lancelot', 'W', 1, 2, 3, 4],
     ['Lancelot', 'U', 1, 2, 3, 4],
     ['Lancelot', 'D', 1, 2, 3, 4],
-  ])('should move %s in %s %d', (name, direction, step, x, y, z) => {
+  ])('should move %s in %s %d (%s, %s, %s)', (name, direction, step, x, y, z) => {
     // given
     const commands = parse(`
       ${initialCommands}
@@ -150,7 +150,7 @@ describe('move command in hexagonal board', () => {
     ['Caraxas', 'W', 2, 0, 3],
     ['Lancelot', 'E', 1, 2, 3],
     ['Lancelot', 'W', 1, 2, 3],
-  ])('should move %s', (name, direction, step, x, y) => {
+  ])('should move %s in %s %s, (%s, %s)', (name, direction, step, x, y) => {
     // given
     const commands = parse(`
       ${initialCommands}
