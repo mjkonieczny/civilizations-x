@@ -1,6 +1,6 @@
 import { it, describe, expect } from 'vitest'
-import { execute } from '../model'
-import { parse } from './input'
+import { execute } from '../../model'
+import { parse } from '../../parser'
 
 describe('create board command', () => {
   it('should not found command', () => {

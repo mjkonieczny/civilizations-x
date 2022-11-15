@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest'
-import { execute } from '../model'
-import { parse } from './input'
+import { execute } from '../../model'
+import { parse } from '../../parser'
 
 const createBoardCommand = 'create board rectangle 5 6'
 

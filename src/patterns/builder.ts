@@ -1,11 +1,11 @@
 import { createChain, Responsibility } from './chainOfResponsibility'
 import { Command } from './command'
-import { Specification } from './specification'
+import { IsSatisfiedBy } from './specification'
 
 type ChainOfResponsibilityBuilder<T> = {
   add: (
     command: Command<T>, 
-    specification?: Specification<T>
+    specification?: IsSatisfiedBy<T>
   ) => ChainOfResponsibilityBuilder<T>
   build: () => Command<T>
 }
@@ -15,7 +15,7 @@ export const chainBuilder = <T>(): ChainOfResponsibilityBuilder<T> => {
 
   function addResponsibility(
     command: Command<T>,
-    specification?: Specification<T>
+    specification?: IsSatisfiedBy<T>
   ): ChainOfResponsibilityBuilder<T> {
     responsibilities.push({ command, specification })
     return this

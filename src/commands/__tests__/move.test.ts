@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest'
-import { execute } from '../model'
-import { parse } from './input'
+import { execute } from '../../model'
+import { parse } from '../../parser'
 
 describe('move command in rectangular board', () => {
   const initialCommands = `

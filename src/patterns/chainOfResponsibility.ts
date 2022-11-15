@@ -1,9 +1,9 @@
 import { Command } from './command'
-import { Specification } from './specification'
+import { IsSatisfiedBy } from './specification'
 
 export type Responsibility<T> = {
   command: Command<T>;
-  specification?: Specification<T>;
+  specification?: IsSatisfiedBy<T>;
 }
 
 export const createChain = <T>(chain: Responsibility<T>[]): Command<T> => (context: T) => {
