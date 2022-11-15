@@ -1,8 +1,7 @@
-import { Command } from '../../model'
-import { compositeCommandFactory } from '../composite'
-import { infoCommandFactory } from '../logs'
+import { compositeCommand } from '../../patterns'
+import { info } from '../logs'
 
-export const fireCommandFactory = (name: string, direction: string): Command => compositeCommandFactory([
+export const fireCommandFactory = (name: string, direction: string) => compositeCommand(
   (game) => {
     const { units, orientation } = game
 
@@ -19,5 +18,5 @@ export const fireCommandFactory = (name: string, direction: string): Command => 
       ))
     }
   },
-  infoCommandFactory(`${name} fired ${direction}`),
-])
+  info(`${name} fired ${direction}`),
+)

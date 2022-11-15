@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest'
-import { execute } from '../model'
-import { parse } from './input'
+import { execute } from '../../model'
+import { parse } from '../../parser'
 
 describe('fire command', () => {
   const initialCommands = `
@@ -27,8 +27,6 @@ describe('fire command', () => {
 
     // when
     const result = execute(commands)
-
-    console.log(result)
 
     // then
     expect(result).toEqual(
