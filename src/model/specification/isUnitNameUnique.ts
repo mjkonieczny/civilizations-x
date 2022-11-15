@@ -1,6 +1,7 @@
-import { Specification } from './specification'
+import { Game } from '..'
+import { IsSatisfiedBy } from '../../patterns'
 
-export const isUnitNameUnique = (name: string): Specification => (game) => {
+export const isUnitNameUnique = (name: string): IsSatisfiedBy<Game> => (game) => {
   const { units } = game
 
   return units.every((unit) => unit.name !== name)

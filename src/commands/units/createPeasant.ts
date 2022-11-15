@@ -1,8 +1,8 @@
-import { Command } from '../../model'
-import { compositeCommandFactory } from '../composite'
-import { infoCommandFactory } from '../logs'
+import { Game } from '../../model'
+import { compositeCommand } from '../../patterns'
+import { info } from '../logs'
 
-export const createPeasantCommandFactory = (name: string, position: number[]): Command => compositeCommandFactory([
+export const createPeasant = (name: string, position: number[]) => compositeCommand<Game>(
   (game) => ({
     ...game,
     units: [
@@ -14,5 +14,5 @@ export const createPeasantCommandFactory = (name: string, position: number[]): C
       },
     ],
   }),
-  infoCommandFactory(`peasant ${name} created at position [${position}]`),
-])
+  info(`peasant ${name} created at position [${position}]`),
+)

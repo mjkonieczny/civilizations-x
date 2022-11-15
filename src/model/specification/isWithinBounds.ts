@@ -1,7 +1,7 @@
 import { Game } from '../game'
-import { Specification } from './specification'
+import { IsSatisfiedBy } from '../../patterns'
 
-export const isWithinBounds = (position: number[]): Specification => (game: Game) => {
+export const isWithinBounds = (position: number[]): IsSatisfiedBy<Game> => (game: Game) => {
   const { orientation } = game
   const { isWithinBounds, createVector } = orientation
 

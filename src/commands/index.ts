@@ -1,22 +1,21 @@
-import { Command } from '../model'
 import { fireCommandFactory } from './attack'
-import { createCommandFactory } from './create'
-import { notFoundCommandFactory } from './logs/notFound'
-import { moveCommandFactory } from './move'
+import { create } from './create'
+import { notFound } from './logs/notFound'
+import { move } from './move'
 
 export const commandFactory = (
   command: string,
-): Command => {
+) => {
   const [name, ...args] = command.split(' ')
 
   switch (name) {
   case 'create':
-    return createCommandFactory(...args)
+    return create(...args)
   case 'move':
-    return moveCommandFactory(args[0], args[1], Number(args[2]))
+    return move(args[0], args[1], Number(args[2]))
   case 'fire':
     return fireCommandFactory(args[0], args[1])
   default:
-    return notFoundCommandFactory(name)
+    return notFound(name)
   }
 }

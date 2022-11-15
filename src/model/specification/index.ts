@@ -1,4 +1,3 @@
-export * from './specification'
-export * from './isBoardSizeNotInRange'
+export * from './isBoardSizeInRange'
 export * from './isWithinBounds'
 export * from './isUnitNameUnique'

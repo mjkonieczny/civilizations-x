@@ -7,3 +7,8 @@ export const ewDirectionsMap: Record<string, number[]> = ({
   E: [1, 0],
   W: [-1, 0],
 })
+
+export const udDirectionsMap: Record<string, number[]> = ({
+  U: [0, 0, 1],
+  D: [0, 0, -1],
+})

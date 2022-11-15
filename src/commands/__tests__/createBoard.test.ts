@@ -1,6 +1,6 @@
 import { it, describe, expect } from 'vitest'
-import { execute } from '../model/command'
-import { parse } from './input'
+import { execute } from '../../model'
+import { parse } from '../../parser'
 
 describe('create board command', () => {
   it('should not found command', () => {
@@ -33,6 +33,8 @@ describe('create board command', () => {
     ['create board rectangle 3 4', 'rectangle', 'Rectangle board created with 3 rows and 4 columns'],
     ['create board hexagon 1 1', 'hexagon', 'Hexagon board created with 1 rows and 1 columns'],
     ['create board hexagon 3 4', 'hexagon', 'Hexagon board created with 3 rows and 4 columns'],
+    ['create board cube 1 1 1', 'cube', 'Cube board created with 1 rows and 1 columns and 1 height'],
+    ['create board cube 3 4 5', 'cube', 'Cube board created with 3 rows and 4 columns and 5 height'],
   ])('should %s', (command, orientationType, text) => {
     // given
     const commands = parse(`

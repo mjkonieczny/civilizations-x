@@ -1,7 +1,6 @@
-import { Command, cubeStrategy, isBoardSizeNotInRange } from '../../model'
-import { compositeCommandFactory } from '../composite'
-import { infoCommandFactory, warningCommandFactory } from '../logs'
-import { chainOfResponsibilityBuilder } from '../chainOfResponsibility'
+import { cubeStrategy, Game, isBoardSizeInRange } from '../../model'
+import { info, warning } from '../logs'
+import { Command, chainBuilder, compositeCommand, not } from '../../patterns'
 
 const dimensionRanges = [
   { min: 1, max: 7 },
@@ -9,18 +8,18 @@ const dimensionRanges = [
   { min: 1, max: 13 },
 ]
 
-export const createCubeBoardCommandFactory = (x: number, y: number, z: number): Command => chainOfResponsibilityBuilder()
-  .addResponsibility(
-    warningCommandFactory('Board size must be between 1-7 x 1-8 x 1-13'),
-    isBoardSizeNotInRange(dimensionRanges)([x, y, z]),
+export const createCube = (x: number, y: number, z: number): Command<Game> => chainBuilder<Game>()
+  .add(
+    warning('Board size must be between 1-7 x 1-8 x 1-13'),
+    not(isBoardSizeInRange(dimensionRanges)([x, y, z])),
   )
-  .addResponsibility(
-    compositeCommandFactory([
+  .add(
+    compositeCommand(
       (game) => ({
         ...game,
         orientation: cubeStrategy(x, y, z),
       }),
-      infoCommandFactory(`Cube board created with ${x} rows and ${y} columns and ${z} height`),
-    ])
+      info(`Cube board created with ${x} rows and ${y} columns and ${z} height`),
+    )
   )
   .build()

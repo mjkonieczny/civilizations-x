@@ -1,8 +1,8 @@
-import { Command } from '../../model'
-import { compositeCommandFactory } from '../composite'
-import { infoCommandFactory } from '../logs'
+import { Game } from '../../model'
+import { compositeCommand } from '../../patterns'
+import { info } from '../logs'
 
-export const moveCommandFactory = (unitName: string, direction: string, step: number): Command => compositeCommandFactory([
+export const move = (unitName: string, direction: string, step: number) => compositeCommand<Game>(
   (game) => ({
     ...game,
     units: game.units.map((unit) => {
@@ -18,5 +18,5 @@ export const moveCommandFactory = (unitName: string, direction: string, step: nu
       return unit
     }),
   }),
-  infoCommandFactory(`${unitName} moved ${direction} ${step}`),
-])
+  info(`${unitName} moved ${direction} ${step}`),
+)
