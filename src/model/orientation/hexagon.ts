@@ -44,5 +44,12 @@ export const hexagonStrategy = (n: number, m: number): Orientation => ({
 
   isInDirection: (source: Vector, target: Vector, direction: string) => {
     return false
+  },
+
+  distance: (source: Vector, target: Vector) => {
+    const [x, y] = source
+    const [tx, ty] = target
+
+    return Math.sqrt(Math.pow(tx - x, 2) + Math.pow(ty - y, 2))
   }
 })

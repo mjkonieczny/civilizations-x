@@ -179,4 +179,51 @@ describe('move command in hexagonal board', () => {
       })
     )
   })
+
+  it.each([
+    [2, 2, 'N', 1],
+    [2, 2, 'S', 1],
+    [2, 2, 'E', 1],
+    [2, 2, 'W', 1],
+    [2, 2, 'NE', 1],
+    [2, 2, 'NW', 1],
+    [2, 2, 'SE', 1],
+    [2, 2, 'SW', 1],
+    [2, 4, 'N', 1],
+    [1, 2, 'S', 1],
+  ])('should not move when wizard nearby (%s, %s) %s %s', (x, y, direction, step) => {
+    // given
+    const commands = parse(`
+      ${initialCommands}
+      create wizard Gandalf ${x} ${y}
+      move Caraxas ${direction} ${step}
+    `)
+
+    // when
+    const result = execute(commands)
+
+    // then
+    expect(result).toEqual(
+      expect.objectContaining({
+        units: expect.arrayContaining([
+          {
+            type: 'dragon',
+            name: 'Caraxas',
+            position: [2, 3],
+          },
+          {
+            type: 'wizard',
+            name: 'Gandalf',
+            position: [x, y],
+          }
+        ]),
+        logs: expect.arrayContaining([
+          {
+            level: 'warning',
+            text: 'Caraxas cannot move because there is a wizard nearby',
+          },
+        ]),
+      })
+    )
+  })
 })

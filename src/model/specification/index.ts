@@ -1,3 +1,5 @@
 export * from './isBoardSizeInRange'
 export * from './isWithinBounds'
 export * from './isUnitNameUnique'
+export * from './isWizardNearby'
+export * from './isUnitOfType'

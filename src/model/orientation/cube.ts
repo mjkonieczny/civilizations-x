@@ -46,5 +46,12 @@ export const cubeStrategy = (n: number, m: number, h: number): Orientation => ({
 
   isInDirection: (source: Vector, target: Vector, direction: string) => {
     return false
+  },
+
+  distance: (source: Vector, target: Vector) => {
+    const [x, y, z] = source
+    const [tx, ty, tz] = target
+
+    return Math.sqrt(Math.pow(tx - x, 2) + Math.pow(ty - y, 2) + Math.pow(tz - z, 2))
   }
 })

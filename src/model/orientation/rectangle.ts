@@ -55,5 +55,12 @@ export const rectangleStrategy = (n: number, m: number): Orientation => ({
     const zy = ty - y
 
     return zy / zx === dy / dx && zx * dx >= 0 && zy * dy >= 0
+  },
+
+  distance: (source: Vector, target: Vector) => {
+    const [x, y] = source
+    const [tx, ty] = target
+
+    return Math.sqrt(Math.pow(tx - x, 2) + Math.pow(ty - y, 2))
   }
 })

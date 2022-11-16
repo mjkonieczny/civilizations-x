@@ -3,10 +3,13 @@ import { execute } from '../../model'
 import { parse } from '../../parser'
 
 describe('create board command', () => {
-  it('should not found command', () => {
+  it.each([
+    ['hokuspokus'],
+    ['abrakadabra'],
+  ])('should not found command', (name) => {
     // given
     const commands = parse(`
-      hokuspokus board 1 2
+      ${name} board 1 2
     `)
 
     // when
@@ -20,7 +23,7 @@ describe('create board command', () => {
         }),
         logs: [
           {
-            text: 'Command hokuspokus not found',
+            text: `Command ${name} not found`,
             level: 'error'
           }
         ]
