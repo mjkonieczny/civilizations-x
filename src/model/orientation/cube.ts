@@ -11,37 +11,24 @@ export const cubeStrategy = (n: number, m: number, h: number): Orientation => ({
   type: 'cube',
 
   createVector: (...args: number[]): Vector => {
-    if (args.length !== 3) {
-      throw new Error('Cube orientation requires 3 arguments')
-    }
-    
     return args
   },
 
   isWithinBounds: (vector: Vector) => {    
     const [x, y, z] = vector
   
-    return x >= 0 && x < n && y >=0 && y < m && z >=0 && z < h
+    // missing implementation
+    return false
   },
 
   isDirection: (direction: string): boolean => {
-    if (direction.length === 1) {
-      return Object.keys(udDirectionsMap).includes(direction) || Object.keys(nsDirectionsMap).includes(direction) || Object.keys(ewDirectionsMap).includes(direction)
-    } else if (direction.length === 2) {
-      return Object.keys(udDirectionsMap).includes(direction[1]) && Object.keys(nsDirectionsMap).includes(direction[0]) || Object.keys(udDirectionsMap).includes(direction[1]) && Object.keys(ewDirectionsMap).includes(direction[0]) || Object.keys(nsDirectionsMap).includes(direction[0]) && Object.keys(ewDirectionsMap).includes(direction[1])
-    } else {
-      return Object.keys(udDirectionsMap).includes(direction[2]) && Object.keys(nsDirectionsMap).includes(direction[0]) && Object.keys(ewDirectionsMap).includes(direction[1])
-    }
+    // missing implementation
+    return false
   },
 
   transform: (vector: Vector, direction: string, step: number) => {
-    const subDirections = direction.split('')
-
-    return subDirections.reduce(([ x, y, z = 0 ], subDirection) => {
-      const [dx, dy, dz = 0] = directionsMap[subDirection]
-
-      return [x + dx * step, y + dy * step, z + dz * step]
-    }, vector)
+    // missing implementation
+    return vector
   },
 
   isInDirection: (source: Vector, target: Vector, direction: string) => {
@@ -52,6 +39,6 @@ export const cubeStrategy = (n: number, m: number, h: number): Orientation => ({
     const [x, y, z] = source
     const [tx, ty, tz] = target
 
-    return Math.sqrt(Math.pow(tx - x, 2) + Math.pow(ty - y, 2) + Math.pow(tz - z, 2))
+    return 1
   }
 })

@@ -1,5 +1,5 @@
 import { Game, hexagonStrategy, isBoardSizeInRange } from '../../model'
-import { info, warning } from '../logs'
+import { info, warning, error } from '../logs'
 import { chainBuilder, compositeCommand, not } from '../../patterns'
 
 const dimensionRanges = [
@@ -9,16 +9,12 @@ const dimensionRanges = [
 
 export const createHexagon = (n: number, m: number) => chainBuilder<Game>()
   .add(
-    warning('Board size must be between 1-5 x 1-5'),
-    not(isBoardSizeInRange(dimensionRanges)([n, m])),
+    error('Board size is improper'),
   )
   .add(
-    compositeCommand(
-      (game) => ({
-        ...game,
-        orientation: hexagonStrategy(n, m),
-      }),
-      info(`Hexagon board created with ${n} rows and ${m} columns`),
-    ),
+    (game) => ({
+      ...game,
+      orientation: hexagonStrategy(n, m),
+    }),
   )
   .build()

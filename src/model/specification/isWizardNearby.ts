@@ -5,15 +5,10 @@ export const isWizardNearby = (name: string):IsSatisfiedBy<Game> => (game: Game)
   const { 
     units, 
     orientation: { 
-      distance
+      distance // distance should be lower than 1.5
     }
   } = game
 
-  const unit = units.find((unit) => unit.name === name)
-
-  if (!unit) {
-    return false
-  }
-
-  return units.some((u) => u.type === 'wizard' && distance(unit.position, u.position) <= 1.5)
+  // missing implementation
+  return false
 }

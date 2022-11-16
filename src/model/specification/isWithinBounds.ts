@@ -5,6 +5,6 @@ export const isWithinBounds = (position: number[]): IsSatisfiedBy<Game> => (game
   const { orientation } = game
   const { isWithinBounds, createVector } = orientation
 
-  return isWithinBounds(createVector(...position))
+  return !isWithinBounds(createVector(...position))
 }
 

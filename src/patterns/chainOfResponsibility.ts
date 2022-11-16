@@ -7,7 +7,8 @@ export type ConditionalCommand<T> = {
 }
 
 export const createChain = <T>(chain: ConditionalCommand<T>[]): Command<T> => (context: T) => {
-  const responsible = chain.find(rule => rule.specification ? rule.specification(context) : true)
 
-  return responsible ? responsible.command(context) : context
+  // missing implementation
+
+  return context
 }

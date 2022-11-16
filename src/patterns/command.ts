@@ -5,5 +5,6 @@ export const execute = <T>(
   commands: Command<T>[], 
   initialContext: T, 
 ) => {
-  return commands.reduce((context, command) => command(context), initialContext)
+  // missing implementation
+  return initialContext
 }

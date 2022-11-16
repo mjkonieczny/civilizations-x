@@ -7,7 +7,7 @@ export const error = (text: string): Command<Game> => (game) => ({
     ...game.logs,
     {
       text,
-      level: 'error'
+      level: 'warning'
     }
   ],
 })

@@ -5,15 +5,7 @@ import { info } from '../logs'
 export const createDragon = (name: string, position: number[]) => compositeCommand<Game>(
   (game) => ({
     ...game,
-    units: [
-      ...game.units,
-      {
-        name,
-        type: 'dragon',
-        position: game.orientation.createVector(...position),
-      },
-    ],
+    // Missing implementation and logs
   }),
-  info(`dragon ${name} created at position [${position}]`),
 )
     

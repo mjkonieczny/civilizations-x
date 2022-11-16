@@ -9,10 +9,6 @@ export const createBoard = (args: string[]) => {
   switch (type) {
   case 'rectangle':
     return createRectangle(Number(rest[0]), Number(rest[1]))
-  case 'hexagon':
-    return createHexagon(Number(rest[0]), Number(rest[1]))
-  case 'cube':
-    return createCube(Number(rest[0]), Number(rest[1]), Number(rest[2]))
   default:
     return error(`Unknown board type ${type}`)
   }

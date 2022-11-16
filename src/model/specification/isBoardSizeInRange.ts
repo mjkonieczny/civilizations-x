@@ -12,5 +12,5 @@ const isDimensionInRange = (range: DimensionRange) => (dimension: number): IsSat
 
 export const isBoardSizeInRange = (dimensionRanges: DimensionRange[]) => (dimensions: number[]): IsSatisfiedBy<Game> =>
   and(
-    ...dimensions.map((dimension, index) => isDimensionInRange(dimensionRanges[index])(dimension))
+    // check all dimensions
   )

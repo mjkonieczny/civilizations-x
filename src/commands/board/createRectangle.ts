@@ -10,16 +10,16 @@ const dimensionRanges = [
 
 export const createRectangle = (n: number, m: number) => chainBuilder<Game>()
   .add(
-    warning('Board size must be between 1-10 x 1-20'),
-    not(isBoardSizeInRange(dimensionRanges)([n, m])),
+    warning('Improper board size'),
+    isBoardSizeInRange(dimensionRanges)([n, m]),
   )
   .add(
     compositeCommand(
       (game) => ({
+        // sth is missing
         ...game,
-        orientation: rectangleStrategy(n, m),
       }),
-      info(`Rectangle board created with ${n} rows and ${m} columns`),
+      info('Rectangle board created'),
     ),
   )
   .build()

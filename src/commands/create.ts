@@ -7,11 +7,6 @@ export const create = (...args: string[])  => {
   switch (type) {
   case 'board':
     return createBoard(rest)
-  case 'dragon':
-  case 'knight':
-  case 'peasant':
-  case 'wizard':
-    return createUnit(type, rest)
   default:
     throw new Error(`Unknown command ${type}`)
   }

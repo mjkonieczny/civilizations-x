@@ -9,12 +9,6 @@ export const createCommand = (
   const [name, ...args] = command.split(' ')
 
   switch (name) {
-  case 'create':
-    return create(...args)
-  case 'move':
-    return move(args[0], args[1], Number(args[2]))
-  case 'fire':
-    return fire(args[0], args[1])
   default:
     return notFound(name)
   }
