@@ -8,6 +8,12 @@ This repository also gives possibility to learn and practice
 - the usage of a few design patterns (few in generic forms)
 - TDD (test driven development) technique
 
+### Branches
+- `master` - is a working branch where implementations are missing
+  - **This is the place where you should start**
+- `final` - contains the final version of the game with all tests passing
+  - **not recommended to go there until you practice and try to green all tests**
+
 ## Commands
 
 ### Install dependencies
