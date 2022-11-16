@@ -1,3 +1,4 @@
+import { error } from '../logs'
 import { createCube } from './createCube'
 import { createHexagon } from './createHexagon'
 import { createRectangle } from './createRectangle'
@@ -13,6 +14,6 @@ export const createBoard = (args: string[]) => {
   case 'cube':
     return createCube(Number(rest[0]), Number(rest[1]), Number(rest[2]))
   default:
-    throw new Error(`Unknown command ${type}`)
+    return error(`Unknown board type ${type}`)
   }
 }

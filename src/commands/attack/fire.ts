@@ -2,7 +2,7 @@ import { Game, isUnitOfType, isWizardNearby } from '../../model'
 import { chainBuilder, compositeCommand, not } from '../../patterns'
 import { info, warning } from '../logs'
 
-export const fireCommandFactory = (name: string, direction: string) => chainBuilder<Game>()
+export const fire = (name: string, direction: string) => chainBuilder<Game>()
   .add(
     warning(`${name} cannot fire because it is not a dragon`),
     not(isUnitOfType('dragon')(name))

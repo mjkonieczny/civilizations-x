@@ -21,7 +21,7 @@ describe('isUnitOfType', () => {
     ['wizard', 'Merlin', 'peasant', false],
     ['wizard', 'Merlin', 'dragon', false],
     ['wizard', 'Merlin', 'wizard', true],
-  ])('should return true', (type, name, expectedType, expected) => {
+  ])('%s %s for %s should return %s', (type, name, expectedType, expected) => {
     // given
     const game: Game = {
       ...createEmptyGame(),

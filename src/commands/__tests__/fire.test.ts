@@ -132,7 +132,7 @@ describe('fire command', () => {
     [1, 3, 'NW'],
     [3, 3, 'NE'],
     [3, 1, 'SE'],
-  ])('should not fire when wizard nearby', (x, y, direction) => {
+  ])('should not fire when wizard nearby (%s, %s) %s', (x, y, direction) => {
     // given
     const commands = parse(`
       ${initialCommands}

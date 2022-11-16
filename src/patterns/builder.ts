@@ -13,7 +13,8 @@ type ChainOfResponsibilityBuilder<T> = {
 export const chainBuilder = <T>(): ChainOfResponsibilityBuilder<T> => {
   const commands: ConditionalCommand<T>[] = []
 
-  function addResponsibility(
+  // this structure allows to use this and return builder and keep functional approach
+  function add(
     command: Command<T>,
     specification?: IsSatisfiedBy<T>
   ): ChainOfResponsibilityBuilder<T> {
@@ -24,7 +25,7 @@ export const chainBuilder = <T>(): ChainOfResponsibilityBuilder<T> => {
   const build = () => createChain<T>(commands)
 
   return {
-    add: addResponsibility,
+    add,
     build,
   }
 }

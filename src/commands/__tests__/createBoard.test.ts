@@ -4,12 +4,12 @@ import { parse } from '../../parser'
 
 describe('create board command', () => {
   it.each([
-    ['hokuspokus'],
-    ['abrakadabra'],
-  ])('should not found command', (name) => {
+    ['spherical'],
+    ['toroidal'],
+  ])('should not create unknown %s board', (name) => {
     // given
     const commands = parse(`
-      ${name} board 1 2
+      create board ${name}
     `)
 
     // when
@@ -23,7 +23,7 @@ describe('create board command', () => {
         }),
         logs: [
           {
-            text: `Command ${name} not found`,
+            text: `Unknown board type ${name}`,
             level: 'error'
           }
         ]
